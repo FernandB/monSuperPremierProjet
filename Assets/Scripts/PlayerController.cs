@@ -78,7 +78,9 @@ public class PlayerController : MonoBehaviour {
         if (Time.realtimeSinceStartup - lastTimeFire > timeToFire)
         {
             UnityEngine.GameObject bullet = Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
+            bullet.SetActive(true);
             bullet.GetComponent<Rigidbody2D>().velocity = gunTransform.right * bulletVelocity;
+           
             Destroy(bullet, 1);
             lastTimeFire = Time.realtimeSinceStartup;
         }

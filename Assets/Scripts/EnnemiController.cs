@@ -27,8 +27,9 @@ public class EnnemiController : MonoBehaviour {
             foreach(Transform t in gunsTransformList)
             {
                 UnityEngine.GameObject bullet = Instantiate(bulletPrefab, t.position, t.rotation);
+                bullet.SetActive(true);
                 bullet.GetComponent<Rigidbody2D>().velocity = t.right * 15;
-
+                
             }
         }
     }

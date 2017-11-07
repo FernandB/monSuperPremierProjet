@@ -5,29 +5,34 @@ using UnityEngine;
 public class BulletController : MonoBehaviour {
     [SerializeField]
     GameObject gameManagerPrefab;
+    GameManager gameManager;
+    [SerializeField]
+    GameObject parentGameObject;
     // Use this for initialization
     void Start () {
-		
-	}
+         gameManager = (GameManager)gameManagerPrefab.GetComponent(typeof(GameManager));
+    }
 	
 	// Update is called once per frame
 	void Update () {
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameManager gameManager = gameManagerPrefab.GetComponentInParent<GameManager>();
-
-        if (collision.tag == "player")
+       
+        if (collision.gameObject.tag == "player"&&parentGameObject.name.Equals("Ennemi"))
             {
             gameManager.PlayerDie();
-            }
-            else
+            
+        }
+        else
             {
-                if(collision.tag == "ennemi")
-               gameManager.EnnemiDie();
-            }
+            if (collision.gameObject.tag == "ennemi" && parentGameObject.name.Equals("Player"))
+                gameManager.EnnemiDie();
+        }
+
+        
     }
 
 }
